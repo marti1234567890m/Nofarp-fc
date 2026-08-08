@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<link rel="manifest" href="manifest.webmanifest">
+<head>
+<meta name="theme-color" content="#e50914">
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>NoFARP FC</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- ================================= -->
+<!-- HEADER -->
+<!-- ================================= -->
+
+<header class="top-header">
+
+    <div class="brand">
+
+        <div class="logo">
+            ⚽
+        </div>
+
+        <div>
+
+            <h1>
+                NoFARP FC
+            </h1>
+
+            <p>
+                FIFA Match Tracker
+            </p>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- ================================= -->
+<!-- NAVIGATION -->
+<!-- ================================= -->
+
+<nav>
+
+    <button
+        class="nav-btn active"
+        onclick="showPage('dashboard', this)"
+    >
+        🏠 Accueil
+    </button>
+
+
+    <button
+    class="nav-btn"
+    onclick="showPage('match', this)"
+>
+    ➕ Match
+</button>
+
+
+<button
+    class="nav-btn"
+    onclick="showPage('party', this)"
+>
+    🎮 Soirée
+</button>
+
+
+<button
+    class="nav-btn"
+    onclick="showPage('hall', this)"
+>
+    🏆 Hall
+</button>
+
+
+    <button
+        class="nav-btn"
+        onclick="showPage('ranking', this)"
+    >
+        
+        🏆 Classement
+    </button>
+
+
+    <button
+        class="nav-btn"
+        onclick="showPage('history', this)"
+    >
+        📜 Historique
+    </button>
+
+
+    <button
+        class="nav-btn"
+        onclick="showPage('players', this)"
+    >
+        👥 Joueurs
+    </button>
+
+</nav>
+
+
+
+<!-- ================================= -->
+<!-- CONTENU -->
+<!-- ================================= -->
+
+<main>
+
+
+<!-- ================================= -->
+<!-- DASHBOARD -->
+<!-- ================================= -->
+
+<section
+    id="dashboard"
+    class="page active-page"
+>
+
+
+    <div class="page-title">
+
+        <h2>
+            Tableau de bord
+        </h2>
+
+        <p>
+            Bienvenue sur NoFARP FC
+        </p>
+
+    </div>
+
+
+
+    <!-- STATS GÉNÉRALES -->
+
+    <div class="stats-grid">
+
+
+        <div class="stat-card">
+
+            <span>
+                🎮
+            </span>
+
+            <strong
+                id="totalMatches"
+            >
+                0
+            </strong>
+
+            <small>
+                Matchs
+            </small>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <span>
+                ⚽
+            </span>
+
+            <strong
+                id="totalGoals"
+            >
+                0
+            </strong>
+
+            <small>
+                Buts
+            </small>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <span>
+                👥
+            </span>
+
+            <strong
+                id="totalPlayers"
+            >
+                0
+            </strong>
+
+            <small>
+                Joueurs
+            </small>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- PODIUM -->
+
+    <div class="panel">
+
+        <h3>
+            🏆 Podium
+        </h3>
+
+
+        <div
+            id="podium"
+            class="podium"
+        ></div>
+
+    </div>
+
+<!-- ================================= -->
+<!-- FORME ACTUELLE -->
+<!-- ================================= -->
+
+<div class="panel form-panel">
+
+    <h3>
+        🔥 Forme actuelle
+    </h3>
+
+    <p class="form-help">
+        Basée sur les 5 derniers matchs de chaque joueur
+    </p>
+
+    <div
+        id="formRanking"
+        class="form-ranking"
+    ></div>
+
+</div>
+
+    <!-- RECORDS -->
+
+    <div class="panel">
+
+        <h3>
+            📊 Records
+        </h3>
+
+
+        <div
+            id="records"
+            class="records-grid"
+        ></div>
+
+    </div>
+
+
+
+    <!-- MEILLEUR JOUEUR + DERNIERS MATCHS -->
+
+    <div class="dashboard-grid">
+
+
+        <div class="panel">
+
+            <h3>
+                👑 Leader actuel
+            </h3>
+
+
+            <div
+                id="bestPlayer"
+            ></div>
+
+        </div>
+
+
+
+        <div class="panel">
+
+            <h3>
+                🔥 Derniers résultats
+            </h3>
+
+
+            <div
+                id="recentMatches"
+            ></div>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ================================= -->
+<!-- AJOUT MATCH -->
+<!-- ================================= -->
+
+<section
+    id="match"
+    class="page"
+>
+
+
+    <h2>
+        Ajouter un match
+    </h2>
+
+
+    <div class="panel match-form">
+
+
+        <label>
+            Joueur 1
+        </label>
+
+
+        <select
+            id="player1"
+        ></select>
+
+
+
+        <div class="score-area">
+
+
+            <input
+                type="number"
+                id="score1"
+                min="0"
+                value="0"
+            >
+
+
+            <span>
+                VS
+            </span>
+
+
+            <input
+                type="number"
+                id="score2"
+                min="0"
+                value="0"
+            >
+
+
+        </div>
+
+
+
+        <label>
+            Joueur 2
+        </label>
+
+
+        <select
+            id="player2"
+        ></select>
+
+
+
+        <button
+            class="main-button"
+            onclick="addMatch()"
+        >
+
+            ⚽ ENREGISTRER LE MATCH
+
+        </button>
+
+
+    </div>
+
+
+</section>
+
+    <!-- ================================= -->
+<!-- HALL OF FAME / SHAME -->
+<!-- ================================= -->
+
+<section
+    id="hall"
+    class="page"
+>
+
+    <div class="page-title">
+
+        <h2>
+            🏆 Hall of Fame
+        </h2>
+
+        <p>
+            Les records historiques de NoFARP FC
+        </p>
+
+    </div>
+
+
+    <!-- HALL OF FAME -->
+
+    <div class="panel hall-panel">
+
+        <h3>
+            🏆 Hall of Fame
+        </h3>
+
+        <div
+            id="hallOfFame"
+            class="hall-list"
+        ></div>
+
+    </div>
+
+
+    <!-- HALL OF SHAME -->
+
+    <div class="panel hall-panel">
+
+        <h3>
+            😈 Hall of Shame
+        </h3>
+
+        <div
+            id="hallOfShame"
+            class="hall-list"
+        ></div>
+
+    </div>
+
+</section>
+    
+<!-- ================================= -->
+<!-- MODE SOIRÉE -->
+<!-- ================================= -->
+
+<section
+    id="party"
+    class="page"
+>
+
+    <div class="page-title">
+
+        <h2>
+            🎮 Mode soirée
+        </h2>
+
+        <p>
+            Enchaîne les matchs rapidement
+        </p>
+
+    </div>
+
+
+    <!-- CONFIGURATION -->
+
+    <div
+        id="partySetup"
+        class="panel"
+    >
+
+        <h3>
+            👥 Joueurs présents
+        </h3>
+
+        <p class="party-help">
+
+            Sélectionne les joueurs qui participent
+            à cette soirée.
+
+        </p>
+
+
+        <div
+            id="partyPlayers"
+            class="party-player-list"
+        ></div>
+
+
+        <button
+            class="main-button"
+            onclick="startParty()"
+        >
+
+            🚀 COMMENCER LA SOIRÉE
+
+        </button>
+
+    </div>
+
+
+    <!-- MATCH EN COURS -->
+
+    <div
+        id="partyGame"
+        class="panel"
+        style="display:none;"
+    >
+
+        <div class="party-header">
+
+            <div>
+
+                <span>
+                    🎮 Soirée en cours
+                </span>
+
+                <strong
+                    id="partyMatchCount"
+                >
+                    0 matchs
+                </strong>
+
+            </div>
+
+
+            <button
+                class="party-end-button"
+                onclick="endParty()"
+            >
+
+                Terminer
+
+            </button>
+
+        </div>
+
+
+        <div class="party-match-form">
+
+            <select
+                id="partyPlayer1"
+            ></select>
+
+
+            <div class="party-score">
+
+                <input
+                    type="number"
+                    id="partyScore1"
+                    min="0"
+                    value="0"
+                >
+
+
+                <span>
+                    -
+                </span>
+
+
+                <input
+                    type="number"
+                    id="partyScore2"
+                    min="0"
+                    value="0"
+                >
+
+            </div>
+
+
+            <select
+                id="partyPlayer2"
+            ></select>
+            
+            <button
+    class="party-next-button"
+    onclick="nextPartyMatch()"
+>
+    ⚡ Match suivant
+</button>
+
+
+            <button
+                class="main-button"
+                onclick="addPartyMatch()"
+            >
+
+                ⚽ ENREGISTRER
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="partyMatches"
+            class="party-matches"
+        ></div>
+
+    </div>
+
+
+    <!-- FIN DE SOIRÉE -->
+
+    <div
+        id="partySummary"
+        class="panel"
+        style="display:none;"
+    >
+
+    </div>
+
+</section>
+
+<!-- ================================= -->
+<!-- CLASSEMENT -->
+<!-- ================================= -->
+
+<section
+    id="ranking"
+    class="page"
+>
+
+
+    <h2>
+        Classement
+    </h2>
+
+
+    <div class="panel table-container">
+
+
+        <table>
+
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        #
+                    </th>
+
+                    <th>
+                        Joueur
+                    </th>
+
+                    <th>
+                        MJ
+                    </th>
+
+                    <th>
+                        V
+                    </th>
+
+                    <th>
+                        N
+                    </th>
+
+                    <th>
+                        D
+                    </th>
+
+                    <th>
+                        BP
+                    </th>
+
+                    <th>
+                        BC
+                    </th>
+
+                    <th>
+                        Diff
+                    </th>
+
+                    <th>
+                        Pts
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody
+                id="rankingBody"
+            ></tbody>
+
+
+        </table>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ================================= -->
+<!-- HISTORIQUE -->
+<!-- ================================= -->
+
+<section
+    id="history"
+    class="page"
+>
+
+
+    <h2>
+        Historique
+    </h2>
+
+
+    <div class="panel">
+
+
+        <div
+            id="matchHistory"
+        ></div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ================================= -->
+<!-- JOUEURS -->
+<!-- ================================= -->
+
+<section
+    id="players"
+    class="page"
+>
+
+
+    <h2>
+        Joueurs
+    </h2>
+
+
+    <div class="panel">
+
+
+        <div class="add-player">
+
+
+            <input
+                type="text"
+                id="newPlayer"
+                placeholder="Nom du joueur"
+            >
+
+
+            <button
+                class="main-button"
+                onclick="addPlayer()"
+            >
+
+                + Ajouter
+
+            </button>
+
+
+        </div>
+
+
+        <div
+            id="playerList"
+        ></div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ================================= -->
+<!-- PROFIL -->
+<!-- ================================= -->
+
+<section
+    id="playerProfile"
+    class="page"
+>
+
+
+    <button
+        class="back-button"
+        onclick="showPage('ranking')"
+    >
+
+        ← Retour
+
+    </button>
+
+
+<div
+    id="profileContent"
+></div>
+
+<div
+    id="playerTrophies"
+    class="panel"
+></div>
+
+
+</section>
+
+
+
+<!-- ================================= -->
+<!-- FACE À FACE -->
+<!-- ================================= -->
+
+<section
+    id="headToHead"
+    class="page"
+>
+
+    <button
+        class="back-button"
+        onclick="showPage('ranking')"
+    >
+        ← Retour
+    </button>
+
+
+    <h2>
+        🥊 Face-à-face
+    </h2>
+
+    <p class="page-subtitle">
+        Qui domine qui ?
+    </p>
+
+
+    <div class="panel">
+
+        <label>
+            Joueur 1
+        </label>
+
+        <select
+            id="h2hPlayer1"
+        ></select>
+
+
+        <label>
+            Joueur 2
+        </label>
+
+        <select
+            id="h2hPlayer2"
+        ></select>
+
+
+        <button
+            class="main-button"
+            onclick="showHeadToHead()"
+        >
+            🥊 Voir la confrontation
+        </button>
+
+    </div>
+
+
+    <!-- RÉSULTAT -->
+
+    <div
+        id="h2hResult"
+    ></div>
+
+</section>
+
+
+</main>
+
+
+
+<script
+    src="app.js"
+></script>
+
+
+</body>
+
+  </html>
